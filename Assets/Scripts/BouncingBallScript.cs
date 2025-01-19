@@ -42,25 +42,25 @@ public class BouncingBallScript : MonoBehaviour
         //bounce the ball off of the edge
         if (posInScreen.x > Screen.width)
         {
-            //pos.x = Screen.width;
+            pos.x = 8;
             xSpeedDirection *= -1;
         }
 
         if (posInScreen.x < -8)
         {
-            //pos.x = -8;
+            pos.x = -8;
             xSpeedDirection *= -1;
         }
 
         if (posInScreen.y > Screen.height) 
         {
-            //pos.y = Screen.height - 1;
+            pos.y = 4;
             ySpeedDirection *= -1;
         }
 
         if (posInScreen.y < -5)
         {
-            //pos.y = -4;
+            pos.y = -4;
             ySpeedDirection *= -1;
         }
 
