@@ -74,7 +74,7 @@ public class TrickShotScript : MonoBehaviour
                 jumping = false;
                 //reset t
                 t = 0;
-                //reset position.y to its inital state
+                //reset position.y and rotation to its inital state
                 pos.y = 0.01f;
                 rot.z = 0;
             }
