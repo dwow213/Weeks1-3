@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CharacterScript : MonoBehaviour
 {
-
+    //boolean variable for determining of direction
     public Boolean facingRight = true;
 
     // Start is called before the first frame update
@@ -38,6 +38,19 @@ public class CharacterScript : MonoBehaviour
 
         //set the character's x-position to the mouse's x-position
         pos.x = mousePos.x;
+
+        //check if the character's x-position goes past its limit on both sides
+        //if it does, stop it in place 
+        if (pos.x > 6.4)
+        {
+            pos.x = 6.4f;
+        }
+
+        if (pos.x < -6.4)
+        {
+            pos.x = -6.4f;
+        }
+
         //update the character's position
         transform.position = pos;
     }
