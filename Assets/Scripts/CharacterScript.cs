@@ -7,7 +7,7 @@ public class CharacterScript : MonoBehaviour
 {
     //variable for the curve used for bobbing up and down
     public AnimationCurve curve;
-    //variable for evaluating the curve
+    //variable for evaluating the curve with a limit from 0 to 2
     [Range(0, 2)] public float t;
 
     //boolean variable for determining of direction
@@ -28,14 +28,14 @@ public class CharacterScript : MonoBehaviour
         //get the position of the mouse
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        //if statements that determine whether the direction of the character
-        //if the current mouse position is greater than the position of the character last frame
+        //if statements that determines the direction of the character
+        //if the current mouse x-position is greater than the x-position of the character last frame
         if ((mousePos.x - pos.x) > 0)
         {
             //make them face right
             facingRight = true;
         }
-        //if the current mouse position is less than the position of the character last frame
+        //if the current mouse x-position is less than the x-position of the character last frame
         else if ((mousePos.x - pos.x) < 0)
         {
             //make them face left
