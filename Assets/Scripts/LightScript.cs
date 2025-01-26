@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+    //variable for the curve used for bobbing up and down
+    public AnimationCurve curve;
+    //variable for evaluating the curve
+    [Range(0, 2)] public float t;
 
     //variable that holds the initial scale of the light objects before it is changed
     Vector2 trueScale;
@@ -13,6 +17,9 @@ public class NewBehaviourScript : MonoBehaviour
     {
         //get the scale of the objects before any changes were made
         trueScale = transform.localScale;
+
+        //set t to 0
+        t = 0;
     }
 
     // Update is called once per frame
@@ -33,6 +40,11 @@ public class NewBehaviourScript : MonoBehaviour
         size.x += Random.Range(-0.1f, 0.1f);
         size.y += Random.Range(-0.1f, 0.1f);
 
+        //increment t for the curve
+        t += 1f * Time.deltaTime;
+        //bob the character up and down by changing its y-position using the curve and t
+        pos.y = curve.Evaluate(t);
+
         //check if light's x-position goes past its limit on both sides
         //if it does, stop it in place 
         if (pos.x > 9.4)
@@ -45,8 +57,15 @@ public class NewBehaviourScript : MonoBehaviour
             pos.x = -3.4f;
         }
 
+        //if t reaches its limit (2), reset it to 0 to loop the curve
+        if (t >= 2)
+        {
+            t = 0;
+        }
+
         //update the character's position and size
         transform.position = pos;
         transform.localScale = size;
+
     }
 }
