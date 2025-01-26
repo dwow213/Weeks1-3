@@ -34,7 +34,7 @@ public class NewBehaviourScript : MonoBehaviour
         Vector2 size = trueScale;
 
         //set the character's x-position to the mouse's x-position
-        pos.x = mousePos.x + 3;
+        pos.x = mousePos.x + 1.1f;
 
         //randomize the size of the object
         size.x += Random.Range(-0.1f, 0.1f);
@@ -47,14 +47,14 @@ public class NewBehaviourScript : MonoBehaviour
 
         //check if light's x-position goes past its limit on both sides
         //if it does, stop it in place 
-        if (pos.x > 9.4)
+        if (pos.x > 7.5)
         {
-            pos.x = 9.4f;
+            pos.x = 7.5f;
         }
 
-        if (pos.x < -3.4)
+        if (pos.x < -5.3)
         {
-            pos.x = -3.4f;
+            pos.x = -5.3f;
         }
 
         //if t reaches its limit (2), reset it to 0 to loop the curve

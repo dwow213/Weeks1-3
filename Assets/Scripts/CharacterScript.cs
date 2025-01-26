@@ -10,8 +10,13 @@ public class CharacterScript : MonoBehaviour
     //variable for evaluating the curve with a limit from 0 to 2
     [Range(0, 2)] public float t;
 
-    //boolean variable for determining of direction
-    public Boolean facingRight = true;
+    //variable for the initial mouse position (position last frame)
+    Vector2 initialMousePos;
+
+    //boolean variable for determining visibility of character
+    public Boolean visible = true;
+    //boolean variable for determining the direction the sprite is facing
+    public Boolean facingRight;
 
     // Start is called before the first frame update
     void Start()
@@ -28,18 +33,40 @@ public class CharacterScript : MonoBehaviour
         //get the position of the mouse
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        //if statements that determines the direction of the character
-        //if the current mouse x-position is greater than the x-position of the character last frame
-        if ((mousePos.x - pos.x) > 0)
+        //if statements that determines the visibilty of the character
+        //if the current mouse x-position is greater than the x-position of the mouse last frame
+        if ((mousePos.x - initialMousePos.x) > 0)
         {
-            //make them face right
-            facingRight = true;
+            //if the sprite is supposed to be facing right
+            if (facingRight)
+            {
+                //make them visible
+                visible = true;
+            }
+            //if the sprite is supposed to be facing left
+            else
+            {
+                //don't make them visible
+                visible = false;
+            }
+
         }
-        //if the current mouse x-position is less than the x-position of the character last frame
-        else if ((mousePos.x - pos.x) < 0)
+        //if the current mouse x-position is less than the x-position of the mouse last frame
+        else if ((mousePos.x - initialMousePos.x) < 0)
         {
-            //make them face left
-            facingRight = false;
+            //if the sprite is supposed to be facing right
+            if (facingRight)
+            {
+                //don't make them visible
+                visible = false;
+            }
+            //if the sprite is supposed to be facing left
+            else
+            {
+                //make them visible
+                visible = true;
+            }
+
         }
 
         //set the character's x-position to the mouse's x-position
@@ -68,7 +95,17 @@ public class CharacterScript : MonoBehaviour
             t = 0;
         }
 
+        //if the character is not visible
+        if (!visible)
+        {
+            //set the character's x-position to be off-screen
+            pos.x = -20;
+        }
+
         //update the character's position
         transform.position = pos;
+
+        //update the initial mouse position in preparation for next frame
+        initialMousePos = mousePos;
     }
 }
